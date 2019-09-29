@@ -32,7 +32,7 @@ module.exports = class extends URL {
      * @param string hostname Hostname
      * @return object Domain information
      */
-    static parseHostname(hostname) {
+    static parseHost(hostname) {
         let matches = hostname.match(/(.*?)(?::([0-9]+))?$/);
         let components = getComponents(matches[1]);
         components.port = matches[2] || null;

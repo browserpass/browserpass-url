@@ -10,7 +10,7 @@ console.log(url.subdomain); // www
 console.log(url.hostname); // www.example.com
 
 // parse a raw hostname (with optional port), rather than a full URL
-var urlDomainOnly = BrowserPassURL.parseHostname("www.example.com:8080");
+var urlDomainOnly = BrowserPassURL.parseHost("www.example.com:8080");
 console.log(urlDomainOnly);
 /* {
  *    hostname: 'www.example.com',
