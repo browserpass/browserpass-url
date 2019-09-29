@@ -66,6 +66,7 @@ function isTLD(hostname) {
  */
 function getComponents(hostname) {
     let components = {
+        hostname,
         tld: null,
         domain: null,
         subdomain: null,
