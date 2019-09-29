@@ -1,4 +1,4 @@
-# BrowserPassURL
+# BrowserpassURL
 
 This package is an extension of the built-in [URL][1] class, which adds some additional properties based on the domain.
 
@@ -10,8 +10,8 @@ The TLD list used by this module is downloaded from [publicsuffix.org][2] when b
 ## Usage
 
 ```JS
-const BrowserPassURL = require("@browserpass/url");
-var url = new BrowserPassURL("http://www.example.com/test");
+const BrowserpassURL = require("@browserpass/url");
+var url = new BrowserpassURL("http://www.example.com/test");
 
 console.log(url.validDomain); // true
 console.log(url.tld); // com
@@ -20,7 +20,7 @@ console.log(url.subdomain); // www
 console.log(url.hostname); // www.example.com
 
 // parse a raw hostname (with optional port), rather than a full URL
-var urlDomainOnly = BrowserPassURL.parseHost("www.example.com:8080");
+var urlDomainOnly = BrowserpassURL.parseHost("www.example.com:8080");
 console.log(urlDomainOnly);
 /* {
  *    hostname: 'www.example.com',
