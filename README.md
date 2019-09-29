@@ -2,7 +2,7 @@
 
 This package is an extension of the built-in [URL][1] class, which adds some additional properties based on the domain.
 
-The TLD list used by this module is downloaded from [publicsuffic.org][2] when building, if it's older than one day.
+The TLD list used by this module is downloaded from [publicsuffix.org][2] when building, if it's older than one day.
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/API/URL
 [2]: https://publicsuffix.org/
