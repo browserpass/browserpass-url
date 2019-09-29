@@ -1,0 +1,25 @@
+{
+    "name": "@browserpass/url",
+    "version": "1.0.0",
+    "description": "Extended URL class with domain analysis",
+    "homepage": "https://github.com/browserpass/browserpass-url",
+    "repository": "github:browserpass/browserpass-url",
+    "license": "ISC",
+    "author": [
+        {
+            "name": "Steve Gilberd",
+            "email": "steve@erayd.net"
+        },
+        {
+            "name": "Maxim Baz",
+            "email": "browserpass@maximbaz.com"
+        }
+    ],
+    "main": "index.js",
+    "dependencies": {
+        "punycode": "^2.1.1"
+    },
+    "devDependencies": {
+        "prettier": "^1.16.4"
+    }
+}

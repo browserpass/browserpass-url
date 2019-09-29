@@ -1,0 +1,75 @@
+"use strict";
+
+const punycode = require("punycode");
+const { tldList } = require("./tld.js");
+
+/**
+ * Enhanced URL class
+ */
+module.exports = class extends URL {
+    /**
+     * Constructor
+     *
+     * @param string url URL to parse
+     * @param string base Base URL
+     */
+    constructor(url, base) {
+        super(url, base);
+
+        let components = getComponents(this.hostname);
+        for (let key in components) {
+            Object.defineProperty(this, key, {
+                value: components[key],
+                writable: false,
+                enumerable: true
+            });
+        }
+    }
+};
+
+/**
+ * Check whether the provided hostname is a TLD
+ *
+ * @param string hostname Hostname to check
+ * @return boolean
+ */
+function isTLD(hostname) {
+    hostname = punycode.toUnicode(hostname);
+    let isTLD = tldList.includes(hostname);
+    if (!isTLD) {
+        isTLD = tldList.includes(`*.${hostname}`);
+        if (isTLD && tldList.includes(`!${hostname}`)) {
+            isTLD = false;
+        }
+    }
+    return isTLD;
+}
+
+/**
+ * Get the components for a hostname
+ *
+ * @param string hostname Hostname
+ */
+function getComponents(hostname) {
+    let components = {
+        tld: null,
+        domain: null,
+        subdomain: null,
+        validDomain: false
+    };
+    let parts = hostname.split(/\./);
+    for (let i = 0; i < parts.length; i++) {
+        let checkTLD = parts.slice(i).join(".");
+        if (isTLD(checkTLD)) {
+            components.tld = checkTLD;
+            if (i > 0) {
+                components.validDomain = true;
+                components.domain = parts.slice(i - 1).join(".");
+                components.subdomain = parts.slice(0, i - 1).join(".");
+            }
+            break;
+        }
+    }
+
+    return components;
+}
