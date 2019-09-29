@@ -25,6 +25,20 @@ module.exports = class extends URL {
             });
         }
     }
+
+    /**
+     * Parse a hostname (with optional port) only, rather than a full URL
+     *
+     * @param string hostname Hostname
+     * @return object Domain information
+     */
+    static parseHostname(hostname) {
+        let matches = hostname.match(/(.*?)(?::([0-9]+))?$/);
+        let components = getComponents(matches[1]);
+        components.port = matches[2] || null;
+
+        return components;
+    }
 };
 
 /**

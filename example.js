@@ -7,3 +7,15 @@ console.log(url.validDomain); // true
 console.log(url.tld); // com
 console.log(url.domain); // example.com
 console.log(url.subdomain); // www
+
+// parse a raw hostname (with optional port), rather than a full URL
+var urlDomainOnly = BrowserPassURL.parseHostname("www.example.com:8080");
+console.log(urlDomainOnly);
+/* {
+ *    tld: 'com',
+ *    domain: 'example.com',
+ *    subdomain: 'www',
+ *    validDomain: true,
+ *    port: '8080'
+ * }
+ */
