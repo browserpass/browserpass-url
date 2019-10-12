@@ -3,6 +3,12 @@
 const punycode = require("punycode");
 const { tldList } = require("./tld.js");
 
+// protocol -> port mapping
+const portMap = {
+    http: 80,
+    https: 443
+}
+
 /**
  * Enhanced URL class
  */
@@ -16,6 +22,17 @@ module.exports = class extends URL {
     constructor(url, base) {
         super(url, base);
 
+        // if no port is defined, but the protocol port is known, set the port to that
+        let rawProtocol = this.protocol.substring(0, this.protocol.length - 1);
+        if (!this.port && rawProtocol in portMap) {
+            Object.defineProperty(this, "port", {
+                value: portMap[rawProtocol].toString(10),
+                writable: false,
+                enumerable: true
+            });
+        }
+
+        // set domain components
         let components = getComponents(this.hostname);
         for (let key in components) {
             Object.defineProperty(this, key, {

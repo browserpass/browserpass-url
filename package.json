@@ -1,6 +1,6 @@
 {
     "name": "@browserpass/url",
-    "version": "1.1.2",
+    "version": "1.1.3",
     "description": "Extended URL class with domain analysis",
     "homepage": "https://github.com/browserpass/browserpass-url",
     "repository": "github:browserpass/browserpass-url",
