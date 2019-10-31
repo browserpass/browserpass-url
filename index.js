@@ -7,7 +7,7 @@ const { tldList } = require("./tld.js");
 const portMap = {
     http: 80,
     https: 443
-}
+};
 
 /**
  * Enhanced URL class
@@ -21,6 +21,11 @@ module.exports = class extends URL {
      */
     constructor(url, base) {
         super(url, base);
+
+        // workaround for firefox bug
+        if (this.origin === "null") {
+            this.origin = null;
+        }
 
         // if no port is defined, but the protocol port is known, set the port to that
         let rawProtocol = this.protocol.substring(0, this.protocol.length - 1);
