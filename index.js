@@ -24,7 +24,7 @@ module.exports = class extends URL {
 
         // workaround for firefox bug
         if (this.origin === "null") {
-            this.origin = null;
+            Object.defineProperty(this, "origin", {get: () => null});
         }
 
         // if no port is defined, but the protocol port is known, set the port to that
