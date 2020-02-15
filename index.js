@@ -20,11 +20,14 @@ module.exports = class extends URL {
      * @param string base Base URL
      */
     constructor(url, base) {
-        super(url, base);
-
-        // workaround for firefox bug
-        if (this.origin === "null") {
-            Object.defineProperty(this, "origin", {get: () => null});
+        try {
+            super(url, base);
+            Object.defineProperty(this, "isValid", { value: true, writable: false });
+        } catch {
+            // For all invalid input, initialize fields with guaranteed invalid host
+            // https://serverfault.com/a/846523
+            super("http://invalid.invalid");
+            Object.defineProperty(this, "isValid", { value: false, writable: false });
         }
 
         // if no port is defined, but the protocol port is known, set the port to that
