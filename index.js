@@ -1,6 +1,6 @@
 "use strict";
 
-const punycode = require("punycode");
+const punycode = require("punycode.js");
 const { tldList } = require("./tld.js");
 
 // protocol -> port mapping
@@ -73,7 +73,6 @@ module.exports = class extends URL {
  * @return boolean
  */
 function isTLD(hostname) {
-    hostname = punycode.toUnicode(hostname);
     let isTLD = tldList.includes(hostname);
     if (!isTLD) {
         isTLD = tldList.includes(`*.${hostname}`);
@@ -90,6 +89,10 @@ function isTLD(hostname) {
  * @param string hostname Hostname
  */
 function getComponents(hostname) {
+    // Convert potential Punycode hostname to Unicode
+    // This won't have any effect if it already is in Unicode
+    hostname = punycode.toUnicode(hostname);
+
     let components = {
         hostname,
         tld: null,
