@@ -1,6 +1,6 @@
 "use strict";
 
-const punycode = require("punycode");
+const punycode = require("punycode.js");
 const { tldList } = require("./tld.js");
 
 // protocol -> port mapping
